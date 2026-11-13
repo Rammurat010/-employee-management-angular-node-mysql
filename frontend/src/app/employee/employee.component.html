@@ -1,0 +1,89 @@
+<div class="container">
+  <h2>Employee Management</h2>
+
+  <form (ngSubmit)="saveEmployee()">
+    <input
+      type="text"
+      name="name"
+      placeholder="Employee Name"
+      [(ngModel)]="employee.name"
+      required
+    />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      [(ngModel)]="employee.email"
+      required
+    />
+
+    <input
+      type="text"
+      name="phone"
+      placeholder="Phone"
+      [(ngModel)]="employee.phone"
+    />
+
+    <input
+      type="text"
+      name="department"
+      placeholder="Department"
+      [(ngModel)]="employee.department"
+    />
+
+    <input
+      type="number"
+      name="salary"
+      placeholder="Salary"
+      [(ngModel)]="employee.salary"
+    />
+
+    <button type="submit">
+      {{ isEdit ? "Update Employee" : "Add Employee" }}
+    </button>
+
+    <button type="button" (click)="resetForm()">Reset</button>
+  </form>
+
+  <h3>Employee List</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (emp of employees; track emp.id) {
+        <tr>
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.phone }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.salary }}</td>
+
+          <td>
+            <button type="button" (click)="editEmployee(emp)">Edit</button>
+
+            <button type="button" (click)="deleteEmployee(emp.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">No employees found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
