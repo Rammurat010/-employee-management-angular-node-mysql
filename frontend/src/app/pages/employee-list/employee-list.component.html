@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="header">
+    <h2>Employee Management</h2>
+
+    <a routerLink="/employees/add" class="btn"> + Add Employee </a>
+  </div>
+
+  <input
+    type="text"
+    class="search"
+    placeholder="Search employee..."
+    [formControl]="searchControl"
+  />
+
+  <p *ngIf="loading">Loading employees...</p>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="table-box" *ngIf="!loading">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Joining Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.phone }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.salary | currency: "INR" }}</td>
+          <td>{{ emp.joining_date | date: "dd-MM-yyyy" }}</td>
+
+          <td>
+            <span
+              [class.active]="emp.status === 'Active'"
+              [class.inactive]="emp.status === 'Inactive'"
+            >
+              {{ emp.status }}
+            </span>
+          </td>
+
+          <td>
+            <a [routerLink]="['/employees/edit', emp.id]" class="edit">
+              Edit
+            </a>
+
+            <button class="delete" (click)="deleteEmployee(emp.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="employees.length === 0">
+          <td colspan="9" class="empty">No employees found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

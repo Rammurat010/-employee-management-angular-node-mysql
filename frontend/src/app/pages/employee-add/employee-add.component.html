@@ -1,0 +1,63 @@
+<div class="form-box">
+  <h2>Add Employee</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="submit()">
+    <label>Name</label>
+    <input type="text" formControlName="name" />
+
+    <small
+      *ngIf="
+        employeeForm.controls.name.touched && employeeForm.controls.name.invalid
+      "
+    >
+      Name is required
+    </small>
+
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+
+    <small
+      *ngIf="
+        employeeForm.controls.email.touched &&
+        employeeForm.controls.email.invalid
+      "
+    >
+      Enter valid email
+    </small>
+
+    <label>Phone</label>
+    <input type="text" formControlName="phone" />
+
+    <small
+      *ngIf="
+        employeeForm.controls.phone.touched &&
+        employeeForm.controls.phone.invalid
+      "
+    >
+      Enter valid phone number
+    </small>
+
+    <label>Department</label>
+    <input type="text" formControlName="department" />
+
+    <label>Salary</label>
+    <input type="number" formControlName="salary" />
+
+    <label>Joining Date</label>
+    <input type="date" formControlName="joining_date" />
+
+    <label>Status</label>
+    <select formControlName="status">
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? "Saving..." : "Save Employee" }}
+    </button>
+
+    <a routerLink="/employees">Back</a>
+  </form>
+</div>
