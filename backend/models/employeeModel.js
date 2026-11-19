@@ -6,10 +6,10 @@ const getAllEmployees = async (search = "") => {
 
   const [rows] = await db.execute(
     `SELECT * FROM employees
-         WHERE name LIKE ?
-         OR email LIKE ?
-         OR department LIKE ?
-         ORDER BY id DESC`,
+     WHERE name LIKE ?
+     OR email LIKE ?
+     OR department LIKE ?
+     ORDER BY id DESC`,
     [value, value, value],
   );
 
@@ -30,8 +30,8 @@ const createEmployee = async (employee) => {
 
   const [result] = await db.execute(
     `INSERT INTO employees
-        (name, email, phone, department, salary, joining_date, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+     (name, email, phone, department, salary, joining_date, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [
       name,
       email,
@@ -53,10 +53,14 @@ const updateEmployee = async (id, employee) => {
 
   const [result] = await db.execute(
     `UPDATE employees SET
-        name = ?, email = ?, phone = ?,
-        department = ?, salary = ?,
-        joining_date = ?, status = ?
-        WHERE id = ?`,
+     name = ?,
+     email = ?,
+     phone = ?,
+     department = ?,
+     salary = ?,
+     joining_date = ?,
+     status = ?
+     WHERE id = ?`,
     [
       name,
       email,
